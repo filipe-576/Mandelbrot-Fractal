@@ -11,7 +11,10 @@ void calculate_mandelbrot(unsigned char *buffer, int xres, int yres, double xmin
     double u2, v2;
     int i, j; /* Pixel counters */
     int k; /* Iteration counter */
+    int pixel_index;
+    unsigned char color_factor;
 
+    #pragma omp parallel for schedule(dynamic, 1) private(j)
     for (j = 0; j < yres; j++) {
         y = ymax - j * dy;
         
@@ -31,7 +34,7 @@ void calculate_mandelbrot(unsigned char *buffer, int xres, int yres, double xmin
             }
             
             /* compute pixel color and write it to file */
-            int pixel_index = (j * xres + i) * 3;
+            pixel_index = (j * xres + i) * 3;
             
             if (k >= maxiter) {
                 /* interior */
@@ -41,11 +44,11 @@ void calculate_mandelbrot(unsigned char *buffer, int xres, int yres, double xmin
             }
             else {
                 /* exterior */
-                unsigned char gray = k % 256;
+                color_factor = k % 256;
                 
-                buffer[pixel_index] = gray; // R
-                buffer[pixel_index + 1] = gray; // G
-                buffer[pixel_index + 2] = gray; // B
+                buffer[pixel_index] = 64; // R
+                buffer[pixel_index + 1] = 0; // G
+                buffer[pixel_index + 2] = color_factor; // B
             }
         }
     }
