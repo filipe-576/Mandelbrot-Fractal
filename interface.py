@@ -21,9 +21,9 @@ lib.calculate_mandelbrot.restype = None
 xmin, xmax = -2.0, 1.0
 ymin, ymax = -1.5, 1.5
 
-base = 16000
-altura = 12000
-max_iter = 500
+base = 20000
+altura = 16000
+max_iter = 100
 
 fractal_image = np.zeros((altura, base, 3), dtype=np.uint8)
 
