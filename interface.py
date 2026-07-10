@@ -1,9 +1,9 @@
 """
 Mandelbrot Fractal Viewer
 
-Este script serve como orquestrador e interface gráfica principal que carrega 
-a biblioteca em C de alto desempenho para o cálculo matemático, 
-enquanto o Python cuida da alocação de memória e da renderização com Matplotlib.
+Este script serve como interface gráfica principal que carrega 
+a biblioteca em C para o cálculo matemático.
+
 """
 import numpy as np
 import matplotlib.pyplot as plt
