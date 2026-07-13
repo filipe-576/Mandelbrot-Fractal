@@ -1,0 +1,58 @@
+CC = gcc
+
+SRC = fractal_calculator.c
+TARGET = mandelbrot.dll
+PYTHON_SCRIPT = interface.py
+
+ifeq ($(OS),WINDOWS_NT)
+	CFLAGS = -shared -O3 -fopenmp -static
+else
+	CFLAGS = -shared -fPIC -O3 -fopenmp
+endif
+
+.PHONY: all
+all: $(TARGET)
+
+
+$(TARGET): $(SRC)
+	$(CC) $(SRC) $(CFLAGS) -o $(TARGET)
+
+.PHONY: low
+low: $(TARGET)
+	python3 $(PYTHON_SCRIPT) -2 1 -1.5 1.5 500 800
+
+.PHONY: medium
+medium: $(TARGET)
+	python3 $(PYTHON_SCRIPT) -2 1 -1.5 1.5 500 2000
+
+.PHONY: high
+high: $(TARGET)
+	python3 $(PYTHON_SCRIPT) -2 1 -1.5 1.5 500 6000
+
+.PHONY: ultra
+ultra: $(TARGET)
+	python3 $(PYTHON_SCRIPT) -2 1 -1.5 1.5 500 14000
+
+.PHONY: cinema
+cinema: $(TARGET)
+	python3 $(PYTHON_SCRIPT) -2 1 -1.5 1.5 300 20000
+
+.PHONY: JU
+JU: $(TARGET)
+	python3 $(PYTHON_SCRIPT) -1.768779334 -1.768778336 0.001738623 0.001739368 500 3000
+
+.PHONY: SV
+SV: $(TARGET)
+	python3 $(PYTHON_SCRIPT) -0.750520338 -0.743517833 0.121803013 0.127094578 500 3000
+
+.PHONY: SP
+SP: $(TARGET)
+	python3 $(PYTHON_SCRIPT) -0.344186615 -0.343427446 -0.611557482 -0.610993828 500 3000
+
+.PHONY: SF
+SF: $(TARGET)
+	python3 $(PYTHON_SCRIPT) -0.375647904 -0.372368633 -0.660981633 -0.658557286 500 3000
+
+.PHONY: SU
+SU: $(TARGET)
+	python3 $(PYTHON_SCRIPT) -0.776606471 -0.776579121 0.136630931 0.13665104 500 3000

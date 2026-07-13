@@ -11,8 +11,15 @@ Python 3.11
 # Instalações das dependências:
 pip install numpy matplotlib 
 
-## Windows
-gcc .\fractal_calculator.c -shared -O3 -fopenmp -static -o mandelbrot.dll
+## Guia para compilação
 
-## Linux
-gcc fractal_calculator.c -shared -O3 -fopenmp -fPIC -o mandelbrot.dll
+| Preset / Nome | Comando |
+| --- | --- |
+| Resolução baixa | `make low` 
+| Resolução média | `make medium` 
+| Resolução alta | `make high`  
+| Absolute Cinema | `make cinema`  
+| Seahorse Valley | `make SV` 
+| Spirals | `make SP`
+| Starfish | `make SF`
+| Seahorse Valley Ultra | `make SU`

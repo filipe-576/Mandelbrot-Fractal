@@ -8,6 +8,21 @@ a biblioteca em C para o cálculo matemático.
 import numpy as np
 import matplotlib.pyplot as plt
 import ctypes
+import sys
+
+if len(sys.argv) != 7:
+    sys.exit(1)
+
+try:
+    args = []
+    for i in range(1, 5):
+        args.append(float(sys.argv[i]))
+
+    for i in range(5, 7):
+        args.append(int(sys.argv[i]))
+except ValueError:
+    print("Argumentos errados")
+    sys.exit(1)
 
 # Carrega a biblioteca dinâmica nativa compilada a partir de fractal_calculator.c
 lib = ctypes.CDLL("./mandelbrot.dll")
@@ -29,13 +44,13 @@ lib.calculate_mandelbrot.argtypes = [
 lib.calculate_mandelbrot.restype = None
 
 # Parâmetros que delimitam a janela do plano que será renderizada.
-xmin, xmax = -2.0, 1.0
-ymin, ymax = -1.5, 1.5
+xmin, xmax = args[0], args[1]
+ymin, ymax = args[2], args[3]
 
 # Resolução base da imagem renderizada. 
-base = 20000
-altura = 16000
-max_iter = 100 # Quantidade máxima de iterações do cálculo do fractal (define os detalhes nas bordas).
+max_iter = args[4]  # Quantidade máxima de iterações do cálculo do fractal (define os detalhes nas bordas).
+base = args[5]
+altura = int((base*(ymax-ymin)) / (xmax-xmin))
 
 # Aloca e zera a memória da matriz da imagem usando Numpy para a resolução fornecida.
 fractal_image = np.zeros((altura, base, 3), dtype=np.uint8)
