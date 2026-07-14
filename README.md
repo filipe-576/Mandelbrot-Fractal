@@ -12,7 +12,9 @@ Python 3.11
 pip install numpy matplotlib 
 
 ## Guia para compilação
+Para somente compilar o código em C: `make all`
 
+Para compilar o código em C e executar:
 | Preset / Nome | Comando |
 | --- | --- |
 | Resolução baixa | `make low` 
